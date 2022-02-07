@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import worker_pb2 as worker__pb2
+import worker.worker_pb2 as worker__pb2
 
 
 class WorkerStub(object):
@@ -66,12 +66,12 @@ class WorkerStub(object):
                 )
         self.ReceiveNotifications = channel.unary_stream(
                 '/worker.Worker/ReceiveNotifications',
-                request_serializer=worker__pb2.None.SerializeToString,
+                request_serializer=worker__pb2.Empty.SerializeToString,
                 response_deserializer=worker__pb2.ReadDevice.FromString,
                 )
         self.ReceiveBroadcasted = channel.unary_stream(
                 '/worker.Worker/ReceiveBroadcasted',
-                request_serializer=worker__pb2.None.SerializeToString,
+                request_serializer=worker__pb2.Empty.SerializeToString,
                 response_deserializer=worker__pb2.ReadDevice.FromString,
                 )
 
@@ -206,12 +206,12 @@ def add_WorkerServicer_to_server(servicer, server):
             ),
             'ReceiveNotifications': grpc.unary_stream_rpc_method_handler(
                     servicer.ReceiveNotifications,
-                    request_deserializer=worker__pb2.None.FromString,
+                    request_deserializer=worker__pb2.Empty.FromString,
                     response_serializer=worker__pb2.ReadDevice.SerializeToString,
             ),
             'ReceiveBroadcasted': grpc.unary_stream_rpc_method_handler(
                     servicer.ReceiveBroadcasted,
-                    request_deserializer=worker__pb2.None.FromString,
+                    request_deserializer=worker__pb2.Empty.FromString,
                     response_serializer=worker__pb2.ReadDevice.SerializeToString,
             ),
     }
@@ -406,7 +406,7 @@ class Worker(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/worker.Worker/ReceiveNotifications',
-            worker__pb2.None.SerializeToString,
+            worker__pb2.Empty.SerializeToString,
             worker__pb2.ReadDevice.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -423,7 +423,7 @@ class Worker(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/worker.Worker/ReceiveBroadcasted',
-            worker__pb2.None.SerializeToString,
+            worker__pb2.Empty.SerializeToString,
             worker__pb2.ReadDevice.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
