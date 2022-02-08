@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import worker.worker_pb2 as worker__pb2
+import worker_pb2 as worker__pb2
 
 
-class BluetoothClassicServiceStub(object):
+class BluetoothClassicStub(object):
     """Bluetooth Classic service
     """
 
@@ -16,18 +16,18 @@ class BluetoothClassicServiceStub(object):
             channel: A grpc.Channel.
         """
         self.Scan = channel.unary_unary(
-                '/worker.BluetoothClassicService/Scan',
+                '/worker.BluetoothClassic/Scan',
                 request_serializer=worker__pb2.DeviceScan.SerializeToString,
                 response_deserializer=worker__pb2.ScanResult.FromString,
                 )
         self.ScanBackground = channel.unary_stream(
-                '/worker.BluetoothClassicService/ScanBackground',
+                '/worker.BluetoothClassic/ScanBackground',
                 request_serializer=worker__pb2.DeviceScan.SerializeToString,
                 response_deserializer=worker__pb2.ScanResult.FromString,
                 )
 
 
-class BluetoothClassicServiceServicer(object):
+class BluetoothClassicServicer(object):
     """Bluetooth Classic service
     """
 
@@ -46,7 +46,7 @@ class BluetoothClassicServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_BluetoothClassicServiceServicer_to_server(servicer, server):
+def add_BluetoothClassicServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Scan': grpc.unary_unary_rpc_method_handler(
                     servicer.Scan,
@@ -60,12 +60,12 @@ def add_BluetoothClassicServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'worker.BluetoothClassicService', rpc_method_handlers)
+            'worker.BluetoothClassic', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class BluetoothClassicService(object):
+class BluetoothClassic(object):
     """Bluetooth Classic service
     """
 
@@ -80,7 +80,7 @@ class BluetoothClassicService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothClassicService/Scan',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothClassic/Scan',
             worker__pb2.DeviceScan.SerializeToString,
             worker__pb2.ScanResult.FromString,
             options, channel_credentials,
@@ -97,14 +97,14 @@ class BluetoothClassicService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothClassicService/ScanBackground',
+        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothClassic/ScanBackground',
             worker__pb2.DeviceScan.SerializeToString,
             worker__pb2.ScanResult.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
 
-class BluetoothLEServiceStub(object):
+class BluetoothLEStub(object):
     """Bluetooth Low Energy
     Common bluetooth commands
     """
@@ -116,73 +116,68 @@ class BluetoothLEServiceStub(object):
             channel: A grpc.Channel.
         """
         self.Scan = channel.unary_unary(
-                '/worker.BluetoothLEService/Scan',
+                '/worker.BluetoothLE/Scan',
                 request_serializer=worker__pb2.DeviceScan.SerializeToString,
                 response_deserializer=worker__pb2.ScanResult.FromString,
                 )
         self.ScanBackground = channel.unary_stream(
-                '/worker.BluetoothLEService/ScanBackground',
+                '/worker.BluetoothLE/ScanBackground',
                 request_serializer=worker__pb2.DeviceScan.SerializeToString,
                 response_deserializer=worker__pb2.ScanResult.FromString,
                 )
         self.Connect = channel.unary_unary(
-                '/worker.BluetoothLEService/Connect',
+                '/worker.BluetoothLE/Connect',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.StatusMessage.FromString,
                 )
         self.Disconnect = channel.unary_unary(
-                '/worker.BluetoothLEService/Disconnect',
+                '/worker.BluetoothLE/Disconnect',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.StatusMessage.FromString,
                 )
         self.ListBLEServices = channel.unary_unary(
-                '/worker.BluetoothLEService/ListBLEServices',
+                '/worker.BluetoothLE/ListBLEServices',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.ListBLEServicesResult.FromString,
                 )
         self.ListBLECharactersistics = channel.unary_unary(
-                '/worker.BluetoothLEService/ListBLECharactersistics',
+                '/worker.BluetoothLE/ListBLECharactersistics',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.ListBLECharactersisticsResult.FromString,
                 )
         self.ListBLEDescriptors = channel.unary_unary(
-                '/worker.BluetoothLEService/ListBLEDescriptors',
+                '/worker.BluetoothLE/ListBLEDescriptors',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.ListBLEDescriptorsResult.FromString,
                 )
         self.ReadBLEDescriptor = channel.unary_unary(
-                '/worker.BluetoothLEService/ReadBLEDescriptor',
+                '/worker.BluetoothLE/ReadBLEDescriptor',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.BluetoothData.FromString,
                 )
         self.WriteBLEDescriptor = channel.unary_unary(
-                '/worker.BluetoothLEService/WriteBLEDescriptor',
+                '/worker.BluetoothLE/WriteBLEDescriptor',
                 request_serializer=worker__pb2.BluetoothData.SerializeToString,
                 response_deserializer=worker__pb2.StatusMessage.FromString,
                 )
         self.Subscribe = channel.unary_unary(
-                '/worker.BluetoothLEService/Subscribe',
+                '/worker.BluetoothLE/Subscribe',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.StatusMessage.FromString,
                 )
         self.Unsubscribe = channel.unary_unary(
-                '/worker.BluetoothLEService/Unsubscribe',
+                '/worker.BluetoothLE/Unsubscribe',
                 request_serializer=worker__pb2.Device.SerializeToString,
                 response_deserializer=worker__pb2.StatusMessage.FromString,
                 )
         self.ReceiveNotifications = channel.unary_stream(
-                '/worker.BluetoothLEService/ReceiveNotifications',
-                request_serializer=worker__pb2.Empty.SerializeToString,
-                response_deserializer=worker__pb2.BluetoothData.FromString,
-                )
-        self.ReceiveBroadcasted = channel.unary_stream(
-                '/worker.BluetoothLEService/ReceiveBroadcasted',
+                '/worker.BluetoothLE/ReceiveNotifications',
                 request_serializer=worker__pb2.Empty.SerializeToString,
                 response_deserializer=worker__pb2.BluetoothData.FromString,
                 )
 
 
-class BluetoothLEServiceServicer(object):
+class BluetoothLEServicer(object):
     """Bluetooth Low Energy
     Common bluetooth commands
     """
@@ -273,15 +268,8 @@ class BluetoothLEServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ReceiveBroadcasted(self, request, context):
-        """global method to receive all the broadcasted data
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
 
-
-def add_BluetoothLEServiceServicer_to_server(servicer, server):
+def add_BluetoothLEServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Scan': grpc.unary_unary_rpc_method_handler(
                     servicer.Scan,
@@ -343,19 +331,14 @@ def add_BluetoothLEServiceServicer_to_server(servicer, server):
                     request_deserializer=worker__pb2.Empty.FromString,
                     response_serializer=worker__pb2.BluetoothData.SerializeToString,
             ),
-            'ReceiveBroadcasted': grpc.unary_stream_rpc_method_handler(
-                    servicer.ReceiveBroadcasted,
-                    request_deserializer=worker__pb2.Empty.FromString,
-                    response_serializer=worker__pb2.BluetoothData.SerializeToString,
-            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'worker.BluetoothLEService', rpc_method_handlers)
+            'worker.BluetoothLE', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class BluetoothLEService(object):
+class BluetoothLE(object):
     """Bluetooth Low Energy
     Common bluetooth commands
     """
@@ -371,7 +354,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/Scan',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/Scan',
             worker__pb2.DeviceScan.SerializeToString,
             worker__pb2.ScanResult.FromString,
             options, channel_credentials,
@@ -388,7 +371,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLEService/ScanBackground',
+        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLE/ScanBackground',
             worker__pb2.DeviceScan.SerializeToString,
             worker__pb2.ScanResult.FromString,
             options, channel_credentials,
@@ -405,7 +388,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/Connect',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/Connect',
             worker__pb2.Device.SerializeToString,
             worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
@@ -422,7 +405,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/Disconnect',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/Disconnect',
             worker__pb2.Device.SerializeToString,
             worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
@@ -439,7 +422,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/ListBLEServices',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/ListBLEServices',
             worker__pb2.Device.SerializeToString,
             worker__pb2.ListBLEServicesResult.FromString,
             options, channel_credentials,
@@ -456,7 +439,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/ListBLECharactersistics',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/ListBLECharactersistics',
             worker__pb2.Device.SerializeToString,
             worker__pb2.ListBLECharactersisticsResult.FromString,
             options, channel_credentials,
@@ -473,7 +456,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/ListBLEDescriptors',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/ListBLEDescriptors',
             worker__pb2.Device.SerializeToString,
             worker__pb2.ListBLEDescriptorsResult.FromString,
             options, channel_credentials,
@@ -490,7 +473,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/ReadBLEDescriptor',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/ReadBLEDescriptor',
             worker__pb2.Device.SerializeToString,
             worker__pb2.BluetoothData.FromString,
             options, channel_credentials,
@@ -507,7 +490,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/WriteBLEDescriptor',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/WriteBLEDescriptor',
             worker__pb2.BluetoothData.SerializeToString,
             worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
@@ -524,7 +507,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/Subscribe',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/Subscribe',
             worker__pb2.Device.SerializeToString,
             worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
@@ -541,7 +524,7 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLEService/Unsubscribe',
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/Unsubscribe',
             worker__pb2.Device.SerializeToString,
             worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
@@ -558,31 +541,14 @@ class BluetoothLEService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLEService/ReceiveNotifications',
-            worker__pb2.Empty.SerializeToString,
-            worker__pb2.BluetoothData.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ReceiveBroadcasted(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLEService/ReceiveBroadcasted',
+        return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLE/ReceiveNotifications',
             worker__pb2.Empty.SerializeToString,
             worker__pb2.BluetoothData.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
 
-class WorkerServiceStub(object):
+class WorkerStub(object):
     """WorkerService 
     """
 
@@ -593,13 +559,13 @@ class WorkerServiceStub(object):
             channel: A grpc.Channel.
         """
         self.WorkerInfo = channel.unary_unary(
-                '/worker.WorkerService/WorkerInfo',
+                '/worker.Worker/WorkerInfo',
                 request_serializer=worker__pb2.Empty.SerializeToString,
                 response_deserializer=worker__pb2.WorkerConfig.FromString,
                 )
 
 
-class WorkerServiceServicer(object):
+class WorkerServicer(object):
     """WorkerService 
     """
 
@@ -611,7 +577,7 @@ class WorkerServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_WorkerServiceServicer_to_server(servicer, server):
+def add_WorkerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'WorkerInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.WorkerInfo,
@@ -620,12 +586,12 @@ def add_WorkerServiceServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'worker.WorkerService', rpc_method_handlers)
+            'worker.Worker', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class WorkerService(object):
+class Worker(object):
     """WorkerService 
     """
 
@@ -640,7 +606,7 @@ class WorkerService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/worker.WorkerService/WorkerInfo',
+        return grpc.experimental.unary_unary(request, target, '/worker.Worker/WorkerInfo',
             worker__pb2.Empty.SerializeToString,
             worker__pb2.WorkerConfig.FromString,
             options, channel_credentials,

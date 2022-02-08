@@ -3,40 +3,53 @@ from worker.worker_pb2_grpc import Worker
 from worker import worker_pb2, worker_pb2_grpc
 import asyncio
 from bleak import BleakScanner
+import time
+
+START_TIME = time.time()
+
 
 class Worker(worker_pb2_grpc.WorkerServicer):
-    async def Scan(self, request: worker_pb2.DeviceScan, context: grpc.aio.ServicerContext) -> worker_pb2.ScanResults:
-        
-        if request.type == worker_pb2.DeviceType.BLE4:
-            async with BleakScanner() as scanner:
-                await asyncio.sleep(request.time)
-            
-            resp = worker_pb2.ScanResults(status=worker_pb2.Status.OK)
+    async def WorkerInfo(
+        self, request: worker_pb2.Empty, context: grpc.aio.ServicerContext
+    ) -> worker_pb2.WorkerConfig:
+        return worker_pb2.WorkerConfig(
+            uptime=round(time.time() - START_TIME),
+            maxDevices=-1,
+            supportedTypes=[worker_pb2.DeviceType.BLE4, worker_pb2.DeviceType.CLASSIC],
+        )
 
-            for d in scanner.discovered_devices:
-                print(d)
-                resp.data.append(
-                    worker_pb2.ScanResult(
-                        device=worker_pb2.Device(
-                            mac=d.address,
-                            type=worker_pb2.DeviceType.BLE4,
-                            ble=None
-                        ),
-                        name=d.name,
-                        rssi=d.rssi,
-                        connected=False
-                    )
+
+class BluetoothLE(worker_pb2_grpc.BluetoothLEServicer):
+    async def Scan(
+        self, request: worker_pb2.DeviceScan, context: grpc.aio.ServicerContext
+    ) -> worker_pb2.ScanResult:
+        async with BleakScanner(
+            scanning_mode=("active" if request.active else "passive")
+        ) as scanner:
+            await asyncio.sleep(request.time)
+
+        resp = worker_pb2.ScanResult(status=worker_pb2.Status.OK)
+
+        for d in scanner.discovered_devices:
+            resp.data.append(
+                worker_pb2.Device(
+                    mac=d.address,
+                    type=worker_pb2.DeviceType.BLE4,
+                    name=d.name,
+                    rssi=d.rssi,
+                    manufacturerData=d.metadata.get("manufacturer_data"),
                 )
-            return resp
+            )
+        return resp
 
-        else:
-            return None
 
 async def serve():
     server = grpc.aio.server()
     worker_pb2_grpc.add_WorkerServicer_to_server(Worker(), server)
-    server.add_insecure_port("[::]:50051")
+    worker_pb2_grpc.add_BluetoothLEServicer_to_server(BluetoothLE(), server)
+    server.add_insecure_port("[::]:50052")
     await server.start()
     await server.wait_for_termination()
+
 
 asyncio.run(serve())
