@@ -36,6 +36,7 @@ jobs:
       run: |
         python -m pip install grpcio-tools
         python -m grpc_tools.protoc worker.proto --python_out=worker --grpc_python_out=worker --proto_path=proto
+        sed -i 's/import worker_pb2 as worker__pb2/import worker.worker_pb2 as worker__pb2/g' worker/worker_pb2_grpc.py
         
     - name: Build package
       run: |
