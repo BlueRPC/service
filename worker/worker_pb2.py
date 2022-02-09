@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\034com.drosocode.bluerpc.workerB\013WorkerProtoP\001Z$github.com/BlueRPC/server/pkg/worker',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0cworker.proto\x12\x06worker\"\x07\n\x05\x45mpty\"/\n\rStatusMessage\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\"*\n\nDeviceScan\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\x0e\n\x06\x61\x63tive\x18\x02 \x01(\x08\"J\n\nScanResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\x1c\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x0e.worker.Device\"\xdb\x01\n\x06\x44\x65vice\x12\x0b\n\x03mac\x18\x01 \x01(\t\x12 \n\x04type\x18\x02 \x01(\x0e\x32\x12.worker.DeviceType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04rssi\x18\x04 \x01(\x02\x12\r\n\x05txpwr\x18\x05 \x01(\x02\x12>\n\x10manufacturerData\x18\x06 \x03(\x0b\x32$.worker.Device.ManufacturerDataEntry\x1a\x37\n\x15ManufacturerDataEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"]\n\rBluetoothData\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\x1e\n\x06\x64\x65vice\x18\x02 \x01(\x0b\x32\x0e.worker.Device\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"\xae\x01\n\tBLEDevice\x12\x1e\n\x06\x64\x65vice\x18\x01 \x01(\x0b\x32\x0e.worker.Device\x12#\n\x07service\x18\x02 \x01(\x0b\x32\x12.worker.BLEService\x12\x31\n\x0e\x63haracteristic\x18\x03 \x01(\x0b\x32\x19.worker.BLECharacteristic\x12)\n\ndescriptor\x18\x04 \x01(\x0b\x32\x15.worker.BLEDescriptor\"Y\n\x15ListBLEServicesResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.worker.BLEService\"h\n\x1dListBLECharactersisticsResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\'\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x19.worker.BLECharacteristic\"_\n\x18ListBLEDescriptorsResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12#\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x15.worker.BLEDescriptor\"\x1a\n\nBLEService\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"|\n\x11\x42LECharacteristic\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x32\n\nproperties\x18\x02 \x03(\x0e\x32\x1e.worker.CharacteristicProperty\x12\x10\n\x08security\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scriptors\x18\x04 \x01(\x03\"\x1d\n\rBLEDescriptor\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"^\n\x0cWorkerConfig\x12\x0e\n\x06uptime\x18\x01 \x01(\x03\x12\x12\n\nmaxDevices\x18\x02 \x01(\x03\x12*\n\x0esupportedTypes\x18\x03 \x03(\x0e\x32\x12.worker.DeviceType*E\n\x16\x43haracteristicProperty\x12\x0c\n\x08READ_CHR\x10\x00\x12\r\n\tWRITE_CHR\x10\x01\x12\x0e\n\nNOTIFY_CHR\x10\x02*#\n\nDeviceType\x12\x0b\n\x07\x43LASSIC\x10\x00\x12\x08\n\x04\x42LE4\x10\x01*\xbb\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x13\n\x0f\x45RR_UNAVAILABLE\x10\x01\x12\x19\n\x15\x45RR_CONNECTION_FAILED\x10\x02\x12\x17\n\x13\x45RR_UNKNOWN_SERVICE\x10\x03\x12\x1e\n\x1a\x45RR_UNKNOWN_CHARACTERISTIC\x10\x04\x12\x1a\n\x16\x45RR_UNKNOWN_DESCRIPTOR\x10\x05\x12\x13\n\x0f\x45RR_UNSUPPORTED\x10\x06\x12\x0f\n\x0b\x45RR_UNKNOWN\x10\x07\x32\x82\x01\n\x10\x42luetoothClassic\x12\x30\n\x04Scan\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x12<\n\x0eScanBackground\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x30\x01\x32\xfe\x05\n\x0b\x42luetoothLE\x12\x30\n\x04Scan\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x12<\n\x0eScanBackground\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x30\x01\x12\x32\n\x07\x43onnect\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x35\n\nDisconnect\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x42\n\x0fListBLEServices\x12\x0e.worker.Device\x1a\x1d.worker.ListBLEServicesResult\"\x00\x12R\n\x17ListBLECharactersistics\x12\x0e.worker.Device\x1a%.worker.ListBLECharactersisticsResult\"\x00\x12H\n\x12ListBLEDescriptors\x12\x0e.worker.Device\x1a .worker.ListBLEDescriptorsResult\"\x00\x12<\n\x11ReadBLEDescriptor\x12\x0e.worker.Device\x1a\x15.worker.BluetoothData\"\x00\x12\x44\n\x12WriteBLEDescriptor\x12\x15.worker.BluetoothData\x1a\x15.worker.StatusMessage\"\x00\x12\x34\n\tSubscribe\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x36\n\x0bUnsubscribe\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12@\n\x14ReceiveNotifications\x12\r.worker.Empty\x1a\x15.worker.BluetoothData\"\x00\x30\x01\x32=\n\x06Worker\x12\x33\n\nWorkerInfo\x12\r.worker.Empty\x1a\x14.worker.WorkerConfig\"\x00\x42S\n\x1c\x63om.drosocode.bluerpc.workerB\x0bWorkerProtoP\x01Z$github.com/BlueRPC/server/pkg/workerb\x06proto3'
+  serialized_pb=b'\n\x0cworker.proto\x12\x06worker\"\x07\n\x05\x45mpty\"/\n\rStatusMessage\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\"*\n\nDeviceScan\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\x0e\n\x06\x61\x63tive\x18\x02 \x01(\x08\"J\n\nScanResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\x1c\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x0e.worker.Device\"\xe9\x01\n\x06\x44\x65vice\x12\x0b\n\x03mac\x18\x01 \x01(\t\x12 \n\x04type\x18\x02 \x01(\x0e\x32\x12.worker.DeviceType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0c\n\x04rssi\x18\x04 \x01(\x02\x12\r\n\x05txpwr\x18\x05 \x01(\x02\x12>\n\x10manufacturerData\x18\x06 \x03(\x0b\x32$.worker.Device.ManufacturerDataEntry\x12\x0c\n\x04time\x18\x07 \x01(\x03\x1a\x37\n\x15ManufacturerDataEntry\x12\x0b\n\x03key\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"]\n\rBluetoothData\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\x1e\n\x06\x64\x65vice\x18\x02 \x01(\x0b\x32\x0e.worker.Device\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"\xae\x01\n\tBLEDevice\x12\x1e\n\x06\x64\x65vice\x18\x01 \x01(\x0b\x32\x0e.worker.Device\x12#\n\x07service\x18\x02 \x01(\x0b\x32\x12.worker.BLEService\x12\x31\n\x0e\x63haracteristic\x18\x03 \x01(\x0b\x32\x19.worker.BLECharacteristic\x12)\n\ndescriptor\x18\x04 \x01(\x0b\x32\x15.worker.BLEDescriptor\"Y\n\x15ListBLEServicesResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12 \n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x12.worker.BLEService\"h\n\x1dListBLECharactersisticsResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12\'\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x19.worker.BLECharacteristic\"_\n\x18ListBLEDescriptorsResult\x12\x1e\n\x06status\x18\x01 \x01(\x0e\x32\x0e.worker.Status\x12#\n\x04\x64\x61ta\x18\x02 \x03(\x0b\x32\x15.worker.BLEDescriptor\"\x1a\n\nBLEService\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"|\n\x11\x42LECharacteristic\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x32\n\nproperties\x18\x02 \x03(\x0e\x32\x1e.worker.CharacteristicProperty\x12\x10\n\x08security\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scriptors\x18\x04 \x01(\x03\"\x1d\n\rBLEDescriptor\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"^\n\x0cWorkerConfig\x12\x0e\n\x06uptime\x18\x01 \x01(\x03\x12\x12\n\nmaxDevices\x18\x02 \x01(\x03\x12*\n\x0esupportedTypes\x18\x03 \x03(\x0e\x32\x12.worker.DeviceType*E\n\x16\x43haracteristicProperty\x12\x0c\n\x08READ_CHR\x10\x00\x12\r\n\tWRITE_CHR\x10\x01\x12\x0e\n\nNOTIFY_CHR\x10\x02*#\n\nDeviceType\x12\x0b\n\x07\x43LASSIC\x10\x00\x12\x08\n\x04\x42LE4\x10\x01*\xbb\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x13\n\x0f\x45RR_UNAVAILABLE\x10\x01\x12\x19\n\x15\x45RR_CONNECTION_FAILED\x10\x02\x12\x17\n\x13\x45RR_UNKNOWN_SERVICE\x10\x03\x12\x1e\n\x1a\x45RR_UNKNOWN_CHARACTERISTIC\x10\x04\x12\x1a\n\x16\x45RR_UNKNOWN_DESCRIPTOR\x10\x05\x12\x13\n\x0f\x45RR_UNSUPPORTED\x10\x06\x12\x0f\n\x0b\x45RR_UNKNOWN\x10\x07\x32\x82\x01\n\x10\x42luetoothClassic\x12\x30\n\x04Scan\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x12<\n\x0eScanBackground\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x30\x01\x32\xbc\x06\n\x0b\x42luetoothLE\x12\x30\n\x04Scan\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x12<\n\x0eScanBackground\x12\x12.worker.DeviceScan\x1a\x12.worker.ScanResult\"\x00\x30\x01\x12<\n\x12ScanBackgroundStop\x12\r.worker.Empty\x1a\x15.worker.StatusMessage\"\x00\x12\x32\n\x07\x43onnect\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x35\n\nDisconnect\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x42\n\x0fListBLEServices\x12\x0e.worker.Device\x1a\x1d.worker.ListBLEServicesResult\"\x00\x12R\n\x17ListBLECharactersistics\x12\x0e.worker.Device\x1a%.worker.ListBLECharactersisticsResult\"\x00\x12H\n\x12ListBLEDescriptors\x12\x0e.worker.Device\x1a .worker.ListBLEDescriptorsResult\"\x00\x12<\n\x11ReadBLEDescriptor\x12\x0e.worker.Device\x1a\x15.worker.BluetoothData\"\x00\x12\x44\n\x12WriteBLEDescriptor\x12\x15.worker.BluetoothData\x1a\x15.worker.StatusMessage\"\x00\x12\x34\n\tSubscribe\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12\x36\n\x0bUnsubscribe\x12\x0e.worker.Device\x1a\x15.worker.StatusMessage\"\x00\x12@\n\x14ReceiveNotifications\x12\r.worker.Empty\x1a\x15.worker.BluetoothData\"\x00\x30\x01\x32=\n\x06Worker\x12\x33\n\nWorkerInfo\x12\r.worker.Empty\x1a\x14.worker.WorkerConfig\"\x00\x42S\n\x1c\x63om.drosocode.bluerpc.workerB\x0bWorkerProtoP\x01Z$github.com/BlueRPC/server/pkg/workerb\x06proto3'
 )
 
 _CHARACTERISTICPROPERTY = _descriptor.EnumDescriptor(
@@ -48,8 +48,8 @@ _CHARACTERISTICPROPERTY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1271,
-  serialized_end=1340,
+  serialized_start=1285,
+  serialized_end=1354,
 )
 _sym_db.RegisterEnumDescriptor(_CHARACTERISTICPROPERTY)
 
@@ -74,8 +74,8 @@ _DEVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1342,
-  serialized_end=1377,
+  serialized_start=1356,
+  serialized_end=1391,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICETYPE)
 
@@ -130,8 +130,8 @@ _STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1380,
-  serialized_end=1567,
+  serialized_start=1394,
+  serialized_end=1581,
 )
 _sym_db.RegisterEnumDescriptor(_STATUS)
 
@@ -321,8 +321,8 @@ _DEVICE_MANUFACTURERDATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=367,
-  serialized_end=422,
+  serialized_start=381,
+  serialized_end=436,
 )
 
 _DEVICE = _descriptor.Descriptor(
@@ -375,6 +375,13 @@ _DEVICE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='time', full_name='worker.Device.time', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -388,7 +395,7 @@ _DEVICE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=203,
-  serialized_end=422,
+  serialized_end=436,
 )
 
 
@@ -433,8 +440,8 @@ _BLUETOOTHDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=424,
-  serialized_end=517,
+  serialized_start=438,
+  serialized_end=531,
 )
 
 
@@ -486,8 +493,8 @@ _BLEDEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=520,
-  serialized_end=694,
+  serialized_start=534,
+  serialized_end=708,
 )
 
 
@@ -525,8 +532,8 @@ _LISTBLESERVICESRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=696,
-  serialized_end=785,
+  serialized_start=710,
+  serialized_end=799,
 )
 
 
@@ -564,8 +571,8 @@ _LISTBLECHARACTERSISTICSRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=787,
-  serialized_end=891,
+  serialized_start=801,
+  serialized_end=905,
 )
 
 
@@ -603,8 +610,8 @@ _LISTBLEDESCRIPTORSRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=893,
-  serialized_end=988,
+  serialized_start=907,
+  serialized_end=1002,
 )
 
 
@@ -635,8 +642,8 @@ _BLESERVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=990,
-  serialized_end=1016,
+  serialized_start=1004,
+  serialized_end=1030,
 )
 
 
@@ -688,8 +695,8 @@ _BLECHARACTERISTIC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1018,
-  serialized_end=1142,
+  serialized_start=1032,
+  serialized_end=1156,
 )
 
 
@@ -720,8 +727,8 @@ _BLEDESCRIPTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1144,
-  serialized_end=1173,
+  serialized_start=1158,
+  serialized_end=1187,
 )
 
 
@@ -766,8 +773,8 @@ _WORKERCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1175,
-  serialized_end=1269,
+  serialized_start=1189,
+  serialized_end=1283,
 )
 
 _STATUSMESSAGE.fields_by_name['status'].enum_type = _STATUS
@@ -926,8 +933,8 @@ _BLUETOOTHCLASSIC = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1570,
-  serialized_end=1700,
+  serialized_start=1584,
+  serialized_end=1714,
   methods=[
   _descriptor.MethodDescriptor(
     name='Scan',
@@ -962,8 +969,8 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1703,
-  serialized_end=2469,
+  serialized_start=1717,
+  serialized_end=2545,
   methods=[
   _descriptor.MethodDescriptor(
     name='Scan',
@@ -986,9 +993,19 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='ScanBackgroundStop',
+    full_name='worker.BluetoothLE.ScanBackgroundStop',
+    index=2,
+    containing_service=None,
+    input_type=_EMPTY,
+    output_type=_STATUSMESSAGE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='Connect',
     full_name='worker.BluetoothLE.Connect',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_STATUSMESSAGE,
@@ -998,7 +1015,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Disconnect',
     full_name='worker.BluetoothLE.Disconnect',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_STATUSMESSAGE,
@@ -1008,7 +1025,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ListBLEServices',
     full_name='worker.BluetoothLE.ListBLEServices',
-    index=4,
+    index=5,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_LISTBLESERVICESRESULT,
@@ -1018,7 +1035,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ListBLECharactersistics',
     full_name='worker.BluetoothLE.ListBLECharactersistics',
-    index=5,
+    index=6,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_LISTBLECHARACTERSISTICSRESULT,
@@ -1028,7 +1045,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ListBLEDescriptors',
     full_name='worker.BluetoothLE.ListBLEDescriptors',
-    index=6,
+    index=7,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_LISTBLEDESCRIPTORSRESULT,
@@ -1038,7 +1055,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ReadBLEDescriptor',
     full_name='worker.BluetoothLE.ReadBLEDescriptor',
-    index=7,
+    index=8,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_BLUETOOTHDATA,
@@ -1048,7 +1065,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='WriteBLEDescriptor',
     full_name='worker.BluetoothLE.WriteBLEDescriptor',
-    index=8,
+    index=9,
     containing_service=None,
     input_type=_BLUETOOTHDATA,
     output_type=_STATUSMESSAGE,
@@ -1058,7 +1075,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Subscribe',
     full_name='worker.BluetoothLE.Subscribe',
-    index=9,
+    index=10,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_STATUSMESSAGE,
@@ -1068,7 +1085,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='Unsubscribe',
     full_name='worker.BluetoothLE.Unsubscribe',
-    index=10,
+    index=11,
     containing_service=None,
     input_type=_DEVICE,
     output_type=_STATUSMESSAGE,
@@ -1078,7 +1095,7 @@ _BLUETOOTHLE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='ReceiveNotifications',
     full_name='worker.BluetoothLE.ReceiveNotifications',
-    index=11,
+    index=12,
     containing_service=None,
     input_type=_EMPTY,
     output_type=_BLUETOOTHDATA,
@@ -1098,8 +1115,8 @@ _WORKER = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2471,
-  serialized_end=2532,
+  serialized_start=2547,
+  serialized_end=2608,
   methods=[
   _descriptor.MethodDescriptor(
     name='WorkerInfo',

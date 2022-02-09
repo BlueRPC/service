@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import worker_pb2 as worker__pb2
+import worker.worker_pb2 as worker__pb2
 
 
 class BluetoothClassicStub(object):
@@ -125,6 +125,11 @@ class BluetoothLEStub(object):
                 request_serializer=worker__pb2.DeviceScan.SerializeToString,
                 response_deserializer=worker__pb2.ScanResult.FromString,
                 )
+        self.ScanBackgroundStop = channel.unary_unary(
+                '/worker.BluetoothLE/ScanBackgroundStop',
+                request_serializer=worker__pb2.Empty.SerializeToString,
+                response_deserializer=worker__pb2.StatusMessage.FromString,
+                )
         self.Connect = channel.unary_unary(
                 '/worker.BluetoothLE/Connect',
                 request_serializer=worker__pb2.Device.SerializeToString,
@@ -191,6 +196,13 @@ class BluetoothLEServicer(object):
 
     def ScanBackground(self, request, context):
         """Enable background scanning with a reporting interval of "time"
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ScanBackgroundStop(self, request, context):
+        """Stop background scanning
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -280,6 +292,11 @@ def add_BluetoothLEServicer_to_server(servicer, server):
                     servicer.ScanBackground,
                     request_deserializer=worker__pb2.DeviceScan.FromString,
                     response_serializer=worker__pb2.ScanResult.SerializeToString,
+            ),
+            'ScanBackgroundStop': grpc.unary_unary_rpc_method_handler(
+                    servicer.ScanBackgroundStop,
+                    request_deserializer=worker__pb2.Empty.FromString,
+                    response_serializer=worker__pb2.StatusMessage.SerializeToString,
             ),
             'Connect': grpc.unary_unary_rpc_method_handler(
                     servicer.Connect,
@@ -374,6 +391,23 @@ class BluetoothLE(object):
         return grpc.experimental.unary_stream(request, target, '/worker.BluetoothLE/ScanBackground',
             worker__pb2.DeviceScan.SerializeToString,
             worker__pb2.ScanResult.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ScanBackgroundStop(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/worker.BluetoothLE/ScanBackgroundStop',
+            worker__pb2.Empty.SerializeToString,
+            worker__pb2.StatusMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
