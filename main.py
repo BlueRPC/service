@@ -2,10 +2,17 @@ import grpc
 from worker.worker_pb2_grpc import Worker
 from worker import worker_pb2, worker_pb2_grpc
 import asyncio
-from bleak import BleakScanner
+from bleak import BleakScanner, BleakClient
 import time
+import re
 
 START_TIME = time.time()
+
+
+def validateMAC(addr: str):
+    return bool(
+        re.match("^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$", addr)
+    )
 
 
 class Worker(worker_pb2_grpc.WorkerServicer):
@@ -22,7 +29,9 @@ class Worker(worker_pb2_grpc.WorkerServicer):
 class BluetoothLE(worker_pb2_grpc.BluetoothLEServicer):
     currentScanResponse = worker_pb2.ScanResult(status=worker_pb2.Status.OK)
     backgroundScan = True
+    connections = {}
 
+    # region BLE Scan
     async def Scan(
         self, request: worker_pb2.DeviceScan, context: grpc.aio.ServicerContext
     ) -> worker_pb2.ScanResult:
@@ -73,6 +82,53 @@ class BluetoothLE(worker_pb2_grpc.BluetoothLEServicer):
 
     async def ScanBackgroundStop(self, request, context):
         self.backgroundScan = False
+        return worker_pb2.StatusMessage(status=worker_pb2.Status.OK)
+
+    # endregion
+
+    # region BLE Connection
+
+    async def Connect(self, request, context):
+        if not validateMAC(request.mac):
+            return worker_pb2.StatusMessage(
+                status=worker_pb2.Status.ERR_INVALID_CONNECTION_SETTINGS,
+                message="invalid mac addr",
+            )
+
+        if request.mac in self.connections:
+            return worker_pb2.StatusMessage(
+                status=worker_pb2.Status.ERR_INVALID_CONNECTION_SETTINGS,
+                message="device already connected",
+            )
+
+        client = BleakClient(request.mac)
+        try:
+            await client.connect()
+            self.connections[request.mac] = client
+        except Exception as e:
+            await client.disconnect()
+            return worker_pb2.StatusMessage(
+                status=worker_pb2.Status.ERR_CONNECTION_FAILED, message=str(e)
+            )
+        return worker_pb2.StatusMessage(status=worker_pb2.Status.OK)
+
+    async def Disconnect(self, request, context):
+        if not validateMAC(request.mac):
+            return worker_pb2.StatusMessage(
+                status=worker_pb2.Status.ERR_INVALID_CONNECTION_SETTINGS,
+                message="invalid mac addr",
+            )
+
+        if request.mac not in self.connections:
+            return worker_pb2.StatusMessage(
+                status=worker_pb2.Status.ERR_INVALID_CONNECTION_SETTINGS,
+                message="device not connected",
+            )
+
+        await self.connections[request.mac].disconnect()
+        del self.connections[request.mac]
+
+    # endregion
 
 
 async def serve():
